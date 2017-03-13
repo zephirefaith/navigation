@@ -181,7 +181,7 @@ namespace move_base {
       costmap_2d::Costmap2DROS* planner_costmap_ros_, *controller_costmap_ros_;
 
       boost::shared_ptr<nav_core::BaseGlobalPlanner> planner_;
-      std::string robot_base_frame_, global_frame_;
+      std::string robot_base_frame_, global_frame_, navigation_mode_;
 
       std::vector<boost::shared_ptr<nav_core::RecoveryBehavior> > recovery_behaviors_;
       unsigned int recovery_index_;

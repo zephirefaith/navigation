@@ -77,6 +77,8 @@ namespace move_base {
     private_nh.param("oscillation_timeout", oscillation_timeout_, 0.0);
     private_nh.param("oscillation_distance", oscillation_distance_, 0.5);
 
+    private_nh.param("navigation_mode", navigation_mode_, std::string("AUTO"))
+
     //set up plan triple buffer
     planner_plan_ = new std::vector<geometry_msgs::PoseStamped>();
     latest_plan_ = new std::vector<geometry_msgs::PoseStamped>();
@@ -913,7 +915,11 @@ namespace move_base {
           planner_cond_.notify_one();
         }
         ROS_DEBUG_NAMED("move_base","Waiting for plan, in the planning state.");
-        break;
+        if (navigation_mode_.compare("FOLLOW") != 0) {
+            break;
+        } else {
+            ROS_INFO("Navigation Mode: FOLLOW. Skipping to CONTROLLING state after having set PLANNING up");
+        }
 
       //if we're controlling, we'll attempt to find valid velocity commands
       case CONTROLLING:
