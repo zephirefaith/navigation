@@ -77,7 +77,7 @@ namespace move_base {
     private_nh.param("oscillation_timeout", oscillation_timeout_, 0.0);
     private_nh.param("oscillation_distance", oscillation_distance_, 0.5);
 
-    private_nh.param("navigation_mode", navigation_mode_, std::string("AUTO"))
+    private_nh.getParam("navigation_mode", navigation_mode_);
 
     //set up plan triple buffer
     planner_plan_ = new std::vector<geometry_msgs::PoseStamped>();
